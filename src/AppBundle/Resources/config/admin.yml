@@ -1,0 +1,35 @@
+# AppBundle/Resources/config/admin.yml
+services:
+    sonata.admin.provincia:
+        class: AppBundle\Admin\ProvinciaAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Provincie" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Provincia
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+    sonata.admin.azienda:
+        class: AppBundle\Admin\AziendaAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Aziende" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Azienda
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+    sonata.admin.comune:
+        class: AppBundle\Admin\ComuneAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Comuni" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Comune
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
