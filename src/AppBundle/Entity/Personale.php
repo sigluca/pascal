@@ -38,28 +38,28 @@ class Personale
     /**
      * @var string
      *
-     * @ORM\Column(name="funzione", type="string", length=32)
+     * @ORM\Column(name="funzione", type="string", length=32, nullable=true)
      */
     private $funzione;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telefono", type="string", length=32)
+     * @ORM\Column(name="telefono", type="string", length=32, nullable=true)
      */
     private $telefono;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fax", type="string", length=32, nullable=TRUE)
+     * @ORM\Column(name="fax", type="string", length=32, nullable=true)
      */
     private $fax;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=32)
+     * @ORM\Column(name="email", type="string", length=32, nullable=true)
      */
     private $email;
 
@@ -82,9 +82,9 @@ class Personale
      * @ORM\JoinColumn(name="tipologia", referencedColumnName="id")
      */
       private $tipologia;
-
+ 
      /**
-     * @ORM\ManyToOne(targetEntity="Azienda", inversedBy="personale")
+     * @ORM\ManyToOne(targetEntity="Azienda", inversedBy="personale", cascade={"persist"})
      * @ORM\JoinColumn(name="azienda", referencedColumnName="id")
      */
     private $azienda;
@@ -333,4 +333,11 @@ class Personale
     {
         return $this->azienda;
     }
+    
+    
+    public function __toString() 
+    {
+        return $this->cognome." ".$this->nome;
+    }
+
 }

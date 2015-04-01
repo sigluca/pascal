@@ -87,7 +87,7 @@ class Azienda
 
     
     /**
-     * @ORM\OneToMany(targetEntity="Personale", mappedBy="azienda")
+     * @ORM\OneToMany(targetEntity="Personale", mappedBy="azienda" , cascade={"persist"})
      */
     protected $personale;
     
@@ -349,6 +349,9 @@ class Azienda
      */
     public function addPersonale(\AppBundle\Entity\Personale $personale)
     {
+        // Aggiunto per questo: http://stackoverflow.com/questions/26890310/how-to-properly-configure-sonata-type-collection-field-in-sonata-admin
+        $personale->setAzienda($this);
+        // Aggiunto
         $this->personale[] = $personale;
 
         return $this;

@@ -43,4 +43,38 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle]]
+            
+    sonata.admin.tipologiapersonale:
+        class: AppBundle\Admin\TipologiaPersonaleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Tipologie di personale" }
+        arguments:
+            - ~
+            - AppBundle\Entity\TipologiaPersonale
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
      
+
+    sonata.admin.personale:
+        class: AppBundle\Admin\PersonaleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Personale aziende" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Personale
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+     
+    sonata.admin.personalegrid:
+        class: AppBundle\Admin\PersonaleGridAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: null, label: "Personale aziende - Internal" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Personale
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+    

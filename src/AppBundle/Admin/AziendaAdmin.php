@@ -1,5 +1,5 @@
 <?php
-// src/AppBundle/Admin/PostAdmin.php
+// src/AppBundle/Admin/AziendaAdmin.php
 
 namespace AppBundle\Admin;
 
@@ -23,7 +23,11 @@ class AziendaAdmin extends Admin
             ->add('numeroaltridipendenti',null,array('label' => 'Numero altri dipendenti'))
             ->add('sito',null,array('label' => 'Sito azienda'))
             ->add('disponibile',null,array('label' => 'Disponibile'))
-        ;
+            ->add('personale', 'sonata_type_collection', 
+                array('by_reference' => false, 'type_options' => array('delete' => false),
+                    'btn_add' => 'Aggiungi personale', ), 
+                array('edit' => 'inline', 'inline' => 'table', 'admin_code' => 'sonata.admin.personalegrid')
+            );
     }
 
     // Fields to be shown on filter forms

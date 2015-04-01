@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * TipologiaPersonale
@@ -105,4 +106,10 @@ class TipologiaPersonale
     {
         return $this->personale;
     }
+    
+    public function __toString() 
+    {
+        return $this->descrizione;
+    }
+
 }
