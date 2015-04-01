@@ -505,4 +505,11 @@ class Azienda
     {
         return $this->disponibilitaAree;
     }
+    
+    
+    public function __toString() 
+    {
+        return $this->denominazione;
+    }
+
 }

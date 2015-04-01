@@ -135,4 +135,11 @@ class Comune
     {
         return $this->sedi;
     }
+    
+    public function __toString() 
+    {
+        return $this->nome;
+    }
+
+    
 }

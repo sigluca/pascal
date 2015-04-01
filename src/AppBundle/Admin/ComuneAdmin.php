@@ -13,7 +13,7 @@ class ComuneAdmin extends Admin
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $provincieFieldOptions = array(); 
+        
         $formMapper
             ->add('nome', 'text', array('label' => 'Nome comune'))
             ->add('provincia', 'sonata_type_model',array(
@@ -21,7 +21,8 @@ class ComuneAdmin extends Admin
             'label' => 'Provincia',
             'required' => true,
             'multiple' => false,
-            'expanded' => false
+            'expanded' => false,
+            'btn_add' => false
         ))
            
         ;
@@ -33,7 +34,7 @@ class ComuneAdmin extends Admin
         $datagridMapper
             //->add('id')
             ->add('nome',null, array('label' => 'Nome comune'))
-            ->add('provincia.nome',null,array('label' => 'Provincia'))
+            ->add('provincia', null, array('label' => 'Provincia'))
         ;
     }
 

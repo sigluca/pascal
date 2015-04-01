@@ -105,4 +105,11 @@ class Provincia
     {
         return $this->comuni;
     }
+    
+    
+    public function __toString() 
+    {
+        return $this->nome;
+    }
+
 }

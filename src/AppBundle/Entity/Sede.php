@@ -31,21 +31,21 @@ class Sede
     /**
      * @var string
      *
-     * @ORM\Column(name="indirizzo", type="string", length=128)
+     * @ORM\Column(name="indirizzo", type="string", length=128, nullable=true)
      */
     private $indirizzo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telefono", type="string", length=32)
+     * @ORM\Column(name="telefono", type="string", length=32, nullable=true)
      */
     private $telefono;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fax", type="string", length=32)
+     * @ORM\Column(name="fax", type="string", length=32, nullable=true)
      */
     private $fax;
 

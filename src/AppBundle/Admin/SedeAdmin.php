@@ -8,21 +8,33 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
   
-class AziendaAdmin extends Admin
+class SedeAdmin extends Admin
 {
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('denominazione',null,array('label' => 'Nome azienda'))
-            ->add('partitaiva',null,array('label' => 'Partita IVA'))
-            ->add('codicefiscale',null,array('label' => 'Codice fiscale'))
-            ->add('numerodirigenti',null,array('label' => 'Numero dirigenti'))
-            ->add('numeroimpiegati',null,array('label' => 'Numero impiegati'))
-            ->add('numerooperai',null,array('label' => 'Numero operai'))
-            ->add('numeroaltridipendenti',null,array('label' => 'Numero altri dipendenti'))
-            ->add('sito',null,array('label' => 'Sito azienda'))
-            ->add('disponibile',null,array('label' => 'Disponibile'))
+            ->add('denominazione',null,array('label' => 'Nome sede'))
+            ->add('indirizzo',null,array('label' => 'Indirizzo'))
+            ->add('telefono',null,array('label' => 'Telefono'))
+            ->add('fax',null,array('label' => 'Fax'))
+            ->add('comune', 'sonata_type_model',array(
+            'property' => 'nome',
+            'label' => 'Comune',
+            'required' => true,
+            'multiple' => false,
+            'expanded' => false,
+            'btn_add' => false))
+             ->add('azienda', 'sonata_type_model',array(
+            'property' => 'denominazione',
+            'label' => 'Azienda',
+            'required' => true,
+            'multiple' => false,
+            'expanded' => false,
+            'btn_add' => false))               
+            //->add('comune',null,array('label' => 'Numero impiegati'))
+            //->add('azienda',null,array('label' => 'Numero operai'))
+            
         ;
     }
 
@@ -30,16 +42,12 @@ class AziendaAdmin extends Admin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            // ->add('id')                
-            ->add('denominazione',null,array('label' => 'Nome azienda'))
-            ->add('partitaiva',null,array('label' => 'Partita IVA'))
-            ->add('codicefiscale',null,array('label' => 'Codice fiscale'))
-            ->add('numerodirigenti',null,array('label' => 'Numero dirigenti'))
-            ->add('numeroimpiegati',null,array('label' => 'Numero impiegati'))
-            ->add('numerooperai',null,array('label' => 'Numero operai'))
-            ->add('numeroaltridipendenti',null,array('label' => 'Numero altri dipendenti'))
-            ->add('sito',null,array('label' => 'Sito azienda'))
-            ->add('disponibile',null,array('label' => 'Disponibile'))
+            ->add('denominazione',null,array('label' => 'Nome sede'))
+            ->add('indirizzo',null,array('label' => 'Indirizzo'))
+            ->add('telefono',null,array('label' => 'Telefono'))
+            ->add('fax',null,array('label' => 'Fax'))
+            ->add('comune',null,array('label' => 'Comune'))
+            ->add('azienda',null,array('label' => 'Azienda'))
         ;
     }
 
@@ -47,15 +55,12 @@ class AziendaAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     { 
         $listMapper
-            ->addIdentifier('denominazione',null,array('label' => 'Nome azienda'))
-            ->add('partitaiva',null,array('label' => 'Partita IVA'))
-            ->add('codicefiscale',null,array('label' => 'Codice fiscale'))
-            ->add('numerodirigenti',null,array('label' => 'Numero dirigenti'))
-            ->add('numeroimpiegati',null,array('label' => 'Numero impiegati'))
-            ->add('numerooperai',null,array('label' => 'Numero operai'))
-            ->add('numeroaltridipendenti',null,array('label' => 'Numero altri dipendenti'))
-            ->add('sito',null,array('label' => 'Sito azienda'))
-            ->add('disponibile',null,array('label' => 'Disponibile'))
+            ->addIdentifier('denominazione',null,array('label' => 'Nome sede'))
+            ->add('indirizzo',null,array('label' => 'Indirizzo'))
+            ->add('telefono',null,array('label' => 'Telefono'))
+            ->add('fax',null,array('label' => 'Fax'))
+            ->add('comune.nome',null,array('label' => 'Comune'))
+            ->add('azienda.denominazione',null,array('label' => 'Azienda'))
         ;
     }
 }

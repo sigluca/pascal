@@ -32,4 +32,15 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle]]
-            
+ 
+    sonata.admin.sede:
+        class: AppBundle\Admin\SedeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Sedi" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Sede
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+     
