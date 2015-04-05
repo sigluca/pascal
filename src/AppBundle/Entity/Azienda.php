@@ -87,14 +87,14 @@ class Azienda
 
     
     /**
-     * @ORM\OneToMany(targetEntity="Personale", mappedBy="azienda" , cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Personale", mappedBy="azienda" ,cascade={"persist"} )
      */
-    protected $personale;
+    private $personale;
     
     /**
-     * @ORM\OneToMany(targetEntity="Sede", mappedBy="azienda")
+     * @ORM\OneToMany(targetEntity="Sede", mappedBy="azienda" ,cascade={"persist"} )
      */
-    protected $sedi;
+    private $sede;
 
     /**
      * @ORM\OneToMany(targetEntity="Questionario", mappedBy="azienda")
@@ -102,27 +102,35 @@ class Azienda
     protected $questionari;
     
     /**
-     * @ORM\OneToMany(targetEntity="DisponibilitaFigure", mappedBy="azienda")
+     * @ORM\OneToMany(targetEntity="DisponibilitaFigure", mappedBy="azienda" )
      */
     protected $disponibilitaFigure;
     
     /**
-     * @ORM\OneToMany(targetEntity="DisponibilitaAree", mappedBy="azienda")
+     * @ORM\OneToMany(targetEntity="Darea", mappedBy="azienda", cascade={"persist"})
      */
-    protected $disponibilitaAree;
+    private $darea;
 
     
     
     public function __construct()
     {
         $this->personale = new ArrayCollection();
-        $this->sedi = new ArrayCollection();
+        $this->sede = new ArrayCollection();
         $this->questionari = new ArrayCollection();       
         $this->disponibilitaFigure = new ArrayCollection();                
-        $this->disponibilitaAree = new ArrayCollection();                
+        $this->darea = new ArrayCollection();                
         
     }
     
+
+ 
+    
+    public function __toString() 
+    {
+        return $this->denominazione;
+    }
+
 
     /**
      * Get id
@@ -349,9 +357,9 @@ class Azienda
      */
     public function addPersonale(\AppBundle\Entity\Personale $personale)
     {
-        // Aggiunto per questo: http://stackoverflow.com/questions/26890310/how-to-properly-configure-sonata-type-collection-field-in-sonata-admin
+        
         $personale->setAzienda($this);
-        // Aggiunto
+        
         $this->personale[] = $personale;
 
         return $this;
@@ -377,39 +385,7 @@ class Azienda
         return $this->personale;
     }
 
-    /**
-     * Add sedi
-     *
-     * @param \AppBundle\Entity\Sede $sedi
-     * @return Azienda
-     */
-    public function addSedi(\AppBundle\Entity\Sede $sedi)
-    {
-        $this->sedi[] = $sedi;
-
-        return $this;
-    }
-
-    /**
-     * Remove sedi
-     *
-     * @param \AppBundle\Entity\Sede $sedi
-     */
-    public function removeSedi(\AppBundle\Entity\Sede $sedi)
-    {
-        $this->sedi->removeElement($sedi);
-    }
-
-    /**
-     * Get sedi
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSedi()
-    {
-        return $this->sedi;
-    }
-
+    
     /**
      * Add questionari
      *
@@ -476,43 +452,93 @@ class Azienda
         return $this->disponibilitaFigure;
     }
 
+   
+
     /**
-     * Add disponibilitaAree
+     * Add sede
      *
-     * @param \AppBundle\Entity\DisponibilitaAree $disponibilitaAree
+     * @param \AppBundle\Entity\Sede $sede
      * @return Azienda
      */
-    public function addDisponibilitaAree(\AppBundle\Entity\DisponibilitaAree $disponibilitaAree)
+    public function addSede(\AppBundle\Entity\Sede $sede)
     {
-        $this->disponibilitaAree[] = $disponibilitaAree;
+        $sede->setAzienda($this);
+
+        $this->sede[] = $sede;
 
         return $this;
     }
 
     /**
-     * Remove disponibilitaAree
+     * Remove sede
      *
-     * @param \AppBundle\Entity\DisponibilitaAree $disponibilitaAree
+     * @param \AppBundle\Entity\Sede $sede
      */
-    public function removeDisponibilitaAree(\AppBundle\Entity\DisponibilitaAree $disponibilitaAree)
+    public function removeSede(\AppBundle\Entity\Sede $sede)
     {
-        $this->disponibilitaAree->removeElement($disponibilitaAree);
+        $this->sede->removeElement($sede);
     }
 
     /**
-     * Get disponibilitaAree
+     * Get sede
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getDisponibilitaAree()
+    public function getSede()
     {
-        return $this->disponibilitaAree;
-    }
-    
-    
-    public function __toString() 
-    {
-        return $this->denominazione;
+        return $this->sede;
     }
 
+   
+
+ 
+
+    /**
+     * Add dareon
+     *
+     * @param \AppBundle\Entity\Darea $darea
+     * @return Azienda
+     */
+    public function addDareon(\AppBundle\Entity\Darea $darea)
+    {
+        $darea->setAzienda($this);
+        $this->darea[] = $darea;
+
+        return $this;
+    }
+
+    
+   /**
+     * Add darea
+     *
+     * @param \AppBundle\Entity\Darea $darea
+     * @return Azienda
+     */
+    public function addDarea(\AppBundle\Entity\Darea $darea)
+    {
+        $darea->setAzienda($this);
+        $this->darea[] = $darea;
+
+        return $this;
+    }    
+
+    /**
+     * Remove dareaon
+     *
+     * @param \AppBundle\Entity\Darea $darea
+     */
+    public function removeDareon(\AppBundle\Entity\Darea $darea)
+    {
+        $this->darea->removeElement($darea);
+    }
+
+    /**
+     * Get darea
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDarea()
+    {
+        return $this->darea;
+    }
 }

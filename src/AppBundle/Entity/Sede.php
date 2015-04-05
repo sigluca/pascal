@@ -56,11 +56,17 @@ class Sede
    private $comune;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Azienda", inversedBy="sedi")
+     * @ORM\ManyToOne(targetEntity="Azienda", inversedBy="sede", cascade={"persist"})
      * @ORM\JoinColumn(name="azienda", referencedColumnName="id")
      */
    private $azienda;
+   
     
+    public function __toString() 
+    {
+        return $this->denominazione;
+    }
+
 
     /**
      * Get id
@@ -167,10 +173,10 @@ class Sede
     /**
      * Set comune
      *
-     * @param integer $comune
+     * @param \AppBundle\Entity\Comune $comune
      * @return Sede
      */
-    public function setComune($comune)
+    public function setComune(\AppBundle\Entity\Comune $comune )
     {
         $this->comune = $comune;
 
@@ -180,35 +186,14 @@ class Sede
     /**
      * Get comune
      *
-     * @return integer 
+     * @return \AppBundle\Entity\Comune 
      */
     public function getComune()
     {
         return $this->comune;
     }
 
-    /**
-     * Set provincia
-     *
-     * @param integer $provincia
-     * @return Sede
-     */
-    public function setProvincia($provincia)
-    {
-        $this->provincia = $provincia;
-
-        return $this;
-    }
-
-    /**
-     * Get provincia
-     *
-     * @return integer 
-     */
-    public function getProvincia()
-    {
-        return $this->provincia;
-    }
+    
 
     /**
      * Set azienda

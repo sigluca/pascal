@@ -1,0 +1,45 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Darea
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class Darea
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="note", type="string", length=64, nullable=true)
+     */
+    private $note;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AreaProfessionale", inversedBy="darea")
+     * @ORM\JoinColumn(name="area", referencedColumnName="id")
+     */
+    private $area;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Azienda", inversedBy="darea", cascade={"persist"})
+     * @ORM\JoinColumn(name="azienda", referencedColumnName="id", nullable=true )
+     */
+    private $azienda;
+
+
+
+}

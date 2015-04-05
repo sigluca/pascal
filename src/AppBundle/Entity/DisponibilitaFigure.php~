@@ -42,7 +42,7 @@ class DisponibilitaFigure
     private $azienda;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Indirizzi", inversedBy="disponibilitaFigure")
+     * @ORM\ManyToOne(targetEntity="Indirizzo", inversedBy="disponibilitaFigure")
      * @ORM\JoinColumn(name="indirizzo", referencedColumnName="id")
      */
     private $indirizzo;
@@ -162,5 +162,38 @@ class DisponibilitaFigure
     public function getIndirizzo()
     {
         return $this->indirizzo;
+    }
+
+    /**
+     * Add mesi
+     *
+     * @param \AppBundle\Entity\DisponibilitaMese $mesi
+     * @return DisponibilitaFigure
+     */
+    public function addMesi(\AppBundle\Entity\DisponibilitaMese $mesi)
+    {
+        $this->mesi[] = $mesi;
+
+        return $this;
+    }
+
+    /**
+     * Remove mesi
+     *
+     * @param \AppBundle\Entity\DisponibilitaMese $mesi
+     */
+    public function removeMesi(\AppBundle\Entity\DisponibilitaMese $mesi)
+    {
+        $this->mesi->removeElement($mesi);
+    }
+
+    /**
+     * Get mesi
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMesi()
+    {
+        return $this->mesi;
     }
 }

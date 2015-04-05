@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Provincia
@@ -24,7 +25,7 @@ class Provincia
     /**
      * @var string
      *
-     * @ORM\Column(name="nome", type="string", length=32)
+     * @ORM\Column(name="nome", type="string", length=32, nullable=false)
      */
     private $nome;
 
@@ -104,4 +105,11 @@ class Provincia
     {
         return $this->comuni;
     }
+    
+    
+    public function __toString() 
+    {
+        return $this->nome;
+    }
+
 }

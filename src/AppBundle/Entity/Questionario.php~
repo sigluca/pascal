@@ -99,4 +99,37 @@ class Questionario
     {
         return $this->azienda;
     }
+
+    /**
+     * Add risposteDate
+     *
+     * @param \AppBundle\Entity\RispostaData $risposteDate
+     * @return Questionario
+     */
+    public function addRisposteDate(\AppBundle\Entity\RispostaData $risposteDate)
+    {
+        $this->risposteDate[] = $risposteDate;
+
+        return $this;
+    }
+
+    /**
+     * Remove risposteDate
+     *
+     * @param \AppBundle\Entity\RispostaData $risposteDate
+     */
+    public function removeRisposteDate(\AppBundle\Entity\RispostaData $risposteDate)
+    {
+        $this->risposteDate->removeElement($risposteDate);
+    }
+
+    /**
+     * Get risposteDate
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRisposteDate()
+    {
+        return $this->risposteDate;
+    }
 }

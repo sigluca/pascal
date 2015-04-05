@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * DisponibilitaAree
+ * Darea
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class DisponibilitaAree
+class Darea
 {
     /**
      * @var integer
@@ -29,16 +29,18 @@ class DisponibilitaAree
     private $note;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AreeProfessionali", inversedBy="disponibilitaAree")
+     * @ORM\ManyToOne(targetEntity="AreaProfessionale", inversedBy="darea")
      * @ORM\JoinColumn(name="area", referencedColumnName="id")
      */
     private $area;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Azienda", inversedBy="disponibilitaAree", cascade={"persist"})
-     * @ORM\JoinColumn(name="azienda", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Azienda", inversedBy="darea", cascade={"persist"})
+     * @ORM\JoinColumn(name="azienda", referencedColumnName="id", nullable=true )
      */
     private $azienda;
+
+
 
 
     /**
@@ -55,7 +57,7 @@ class DisponibilitaAree
      * Set note
      *
      * @param string $note
-     * @return DisponibilitaAree
+     * @return Darea
      */
     public function setNote($note)
     {
@@ -77,10 +79,10 @@ class DisponibilitaAree
     /**
      * Set area
      *
-     * @param integer $area
-     * @return DisponibilitaAree
+     * @param \AppBundle\Entity\AreaProfessionale $area
+     * @return Darea
      */
-    public function setArea($area)
+    public function setArea(\AppBundle\Entity\AreaProfessionale $area = null)
     {
         $this->area = $area;
 
@@ -90,7 +92,7 @@ class DisponibilitaAree
     /**
      * Get area
      *
-     * @return integer 
+     * @return \AppBundle\Entity\AreaProfessionale 
      */
     public function getArea()
     {
@@ -100,10 +102,10 @@ class DisponibilitaAree
     /**
      * Set azienda
      *
-     * @param integer $azienda
-     * @return DisponibilitaAree
+     * @param \AppBundle\Entity\Azienda $azienda
+     * @return Darea
      */
-    public function setAzienda($azienda)
+    public function setAzienda(\AppBundle\Entity\Azienda $azienda = null)
     {
         $this->azienda = $azienda;
 
@@ -113,7 +115,7 @@ class DisponibilitaAree
     /**
      * Get azienda
      *
-     * @return integer 
+     * @return \AppBundle\Entity\Azienda 
      */
     public function getAzienda()
     {

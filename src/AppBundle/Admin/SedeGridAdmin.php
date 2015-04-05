@@ -1,5 +1,5 @@
 <?php
-// src/AppBundle/Admin/SedeAdmin.php
+// src/AppBundle/Admin/SedeGridAdmin.php
     
 namespace AppBundle\Admin;
   
@@ -8,11 +8,12 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
   
-class SedeAdmin extends Admin
+class SedeGridAdmin extends Admin
 {
-    protected $baseRouteName = 'sedeadmin';
+    protected $baseRouteName = 'sedegridadmin';
 
-    protected $baseRoutePattern = 'Sede-Admin';        
+    protected $baseRoutePattern = 'Sede-Grid-Admin';        
+    
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -28,16 +29,6 @@ class SedeAdmin extends Admin
             'multiple' => false,
             'expanded' => false,
             'btn_add' => false))
-             ->add('azienda', 'sonata_type_model',array(
-            'property' => 'denominazione',
-            'label' => 'Azienda',
-            'required' => true,
-            'multiple' => false,
-            'expanded' => false,
-            'btn_add' => false))               
-            //->add('comune',null,array('label' => 'Numero impiegati'))
-            //->add('azienda',null,array('label' => 'Numero operai'))
-            
         ;
     }
 
@@ -50,7 +41,8 @@ class SedeAdmin extends Admin
             ->add('telefono',null,array('label' => 'Telefono'))
             ->add('fax',null,array('label' => 'Fax'))
             ->add('comune',null,array('label' => 'Comune'))
-            ->add('azienda',null,array('label' => 'Azienda'))
+            ->add('azienda', null, array('label' => 'Azienda'))                   
+            
         ;
     }
 
@@ -63,7 +55,8 @@ class SedeAdmin extends Admin
             ->add('telefono',null,array('label' => 'Telefono'))
             ->add('fax',null,array('label' => 'Fax'))
             ->add('comune.nome',null,array('label' => 'Comune'))
-            ->add('azienda.denominazione',null,array('label' => 'Azienda'))
+            ->add('azienda', null, array('label' => 'Azienda'))                   
+            
         ;
     }
 }

@@ -31,21 +31,21 @@ class Sede
     /**
      * @var string
      *
-     * @ORM\Column(name="indirizzo", type="string", length=128)
+     * @ORM\Column(name="indirizzo", type="string", length=128, nullable=true)
      */
     private $indirizzo;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telefono", type="string", length=32)
+     * @ORM\Column(name="telefono", type="string", length=32, nullable=true)
      */
     private $telefono;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fax", type="string", length=32)
+     * @ORM\Column(name="fax", type="string", length=32, nullable=true)
      */
     private $fax;
 
@@ -56,11 +56,17 @@ class Sede
    private $comune;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Azienda", inversedBy="sedi")
+     * @ORM\ManyToOne(targetEntity="Azienda", inversedBy="sede", cascade={"persist"})
      * @ORM\JoinColumn(name="azienda", referencedColumnName="id")
      */
    private $azienda;
+   
     
+    public function __toString() 
+    {
+        return $this->denominazione;
+    }
+
 
     /**
      * Get id
@@ -167,10 +173,10 @@ class Sede
     /**
      * Set comune
      *
-     * @param integer $comune
+     * @param \AppBundle\Entity\Comune $comune
      * @return Sede
      */
-    public function setComune($comune)
+    public function setComune(\AppBundle\Entity\Comune $comune )
     {
         $this->comune = $comune;
 
@@ -180,56 +186,12 @@ class Sede
     /**
      * Get comune
      *
-     * @return integer 
+     * @return \AppBundle\Entity\Comune 
      */
     public function getComune()
     {
         return $this->comune;
     }
 
-    /**
-     * Set provincia
-     *
-     * @param integer $provincia
-     * @return Sede
-     */
-    public function setProvincia($provincia)
-    {
-        $this->provincia = $provincia;
-
-        return $this;
-    }
-
-    /**
-     * Get provincia
-     *
-     * @return integer 
-     */
-    public function getProvincia()
-    {
-        return $this->provincia;
-    }
-
-    /**
-     * Set azienda
-     *
-     * @param \AppBundle\Entity\Azienda $azienda
-     * @return Sede
-     */
-    public function setAzienda(\AppBundle\Entity\Azienda $azienda = null)
-    {
-        $this->azienda = $azienda;
-
-        return $this;
-    }
-
-    /**
-     * Get azienda
-     *
-     * @return \AppBundle\Entity\Azienda 
-     */
-    public function getAzienda()
-    {
-        return $this->azienda;
-    }
+    
 }

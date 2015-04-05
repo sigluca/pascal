@@ -140,6 +140,4 @@ class Comune
     {
         return $this->nome;
     }
-
-    
 }

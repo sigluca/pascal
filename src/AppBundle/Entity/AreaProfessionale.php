@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * AreeProfessionali
+ * AreaProfessionale
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class AreeProfessionali
+class AreaProfessionale
 {
     /**
      * @var integer
@@ -30,13 +30,13 @@ class AreeProfessionali
     private $descrizione;
 
     /**
-     * @ORM\OneToMany(targetEntity="DisponibilitaAree", mappedBy="area")
+     * @ORM\OneToMany(targetEntity="Darea", mappedBy="area")
      */
-    protected $disponibilitaAree;
+    protected $darea;
     
     public function __construct()
     {
-        $this->disponibilitaAree = new ArrayCollection();
+        $this->darea = new ArrayCollection();
     }    
     
     
@@ -73,38 +73,6 @@ class AreeProfessionali
         return $this->descrizione;
     }
 
-    /**
-     * Add disponibilitaAree
-     *
-     * @param \AppBundle\Entity\DisponibilitaAree $disponibilitaAree
-     * @return AreeProfessionali
-     */
-    public function addDisponibilitaAree(\AppBundle\Entity\DisponibilitaAree $disponibilitaAree)
-    {
-        $this->disponibilitaAree[] = $disponibilitaAree;
-
-        return $this;
-    }
-
-    /**
-     * Remove disponibilitaAree
-     *
-     * @param \AppBundle\Entity\DisponibilitaAree $disponibilitaAree
-     */
-    public function removeDisponibilitaAree(\AppBundle\Entity\DisponibilitaAree $disponibilitaAree)
-    {
-        $this->disponibilitaAree->removeElement($disponibilitaAree);
-    }
-
-    /**
-     * Get disponibilitaAree
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getDisponibilitaAree()
-    {
-        return $this->disponibilitaAree;
-    }
     
     
     public function __toString() 
@@ -112,4 +80,37 @@ class AreeProfessionali
         return $this->descrizione;
     }
 
+
+    /**
+     * Add darea
+     *
+     * @param \AppBundle\Entity\Darea $darea
+     * @return AreaProfessionale
+     */
+    public function addDarea(\AppBundle\Entity\Darea $darea)
+    {
+        $this->darea[] = $darea;
+
+        return $this;
+    }
+
+    /**
+     * Remove darea
+     *
+     * @param \AppBundle\Entity\Darea $darea
+     */
+    public function removeDarea(\AppBundle\Entity\Darea $darea)
+    {
+        $this->darea->removeElement($darea);
+    }
+
+    /**
+     * Get darea
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDarea()
+    {
+        return $this->darea;
+    }
 }

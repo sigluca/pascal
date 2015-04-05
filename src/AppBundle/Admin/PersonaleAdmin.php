@@ -10,6 +10,9 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class PersonaleAdmin extends Admin
 {
+    protected $baseRouteName = 'personaleadmin';
+
+    protected $baseRoutePattern = 'Personale-Admin';    
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -20,8 +23,8 @@ class PersonaleAdmin extends Admin
             ->add('telefono',null,array('label' => 'Telefono'))
             ->add('fax',null,array('label' => 'Fax'))
             ->add('email',null,array('label' => 'E-mail'))
-            ->add('svoltocorso',null,array('label' => 'Svolto corsi'))
-            ->add('disponibilecorso',null,array('label' => 'Disponibile corsi'))
+            ->add('svoltocorso','checkbox',array('required'=>false, 'label' => 'Svolto corsi'))
+            ->add('disponibilecorso','checkbox',array('required'=>false, 'label' => 'Disponibile corsi'))
              ->add('tipologia', 'sonata_type_model',array(
             'property' => 'descrizione',
             'label' => 'Tipologia',

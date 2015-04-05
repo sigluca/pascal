@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Azienda
@@ -31,49 +32,49 @@ class Azienda
     /**
      * @var string
      *
-     * @ORM\Column(name="partitaiva", type="string", length=32)
+     * @ORM\Column(name="partitaiva", type="string", length=32, nullable=true)
      */
     private $partitaiva;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="codicefiscale", type="string", length=32)
+     * @ORM\Column(name="codicefiscale", type="string", length=32, nullable=true)
      */
     private $codicefiscale;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="numerodirigenti", type="smallint")
+     * @ORM\Column(name="numerodirigenti", type="smallint", nullable=true)
      */
     private $numerodirigenti;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="numeroimpiegati", type="smallint")
+     * @ORM\Column(name="numeroimpiegati", type="smallint", nullable=true)
      */
     private $numeroimpiegati;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="numerooperai", type="smallint")
+     * @ORM\Column(name="numerooperai", type="smallint", nullable=true)
      */
     private $numerooperai;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="numeroaltridipendenti", type="smallint")
+     * @ORM\Column(name="numeroaltridipendenti", type="smallint", nullable=true)
      */
     private $numeroaltridipendenti;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="sito", type="string", length=255)
+     * @ORM\Column(name="sito", type="string", length=255, nullable=true)
      */
     private $sito;
 
@@ -86,14 +87,14 @@ class Azienda
 
     
     /**
-     * @ORM\OneToMany(targetEntity="Personale", mappedBy="azienda")
+     * @ORM\OneToMany(targetEntity="Personale", mappedBy="azienda" ,cascade={"persist"} )
      */
-    protected $personale;
+    private $personale;
     
     /**
-     * @ORM\OneToMany(targetEntity="Sede", mappedBy="azienda")
+     * @ORM\OneToMany(targetEntity="Sede", mappedBy="azienda" ,cascade={"persist"} )
      */
-    protected $sedi;
+    private $sede;
 
     /**
      * @ORM\OneToMany(targetEntity="Questionario", mappedBy="azienda")
@@ -101,27 +102,35 @@ class Azienda
     protected $questionari;
     
     /**
-     * @ORM\OneToMany(targetEntity="DisponibilitaFigure", mappedBy="azienda")
+     * @ORM\OneToMany(targetEntity="DisponibilitaFigure", mappedBy="azienda" )
      */
     protected $disponibilitaFigure;
     
     /**
-     * @ORM\OneToMany(targetEntity="DisponibilitaAree", mappedBy="azienda")
+     * @ORM\OneToMany(targetEntity="Darea", mappedBy="azienda", cascade={"persist"})
      */
-    protected $disponibilitaAree;
+    private $darea;
 
     
     
     public function __construct()
     {
         $this->personale = new ArrayCollection();
-        $this->sedi = new ArrayCollection();
+        $this->sede = new ArrayCollection();
         $this->questionari = new ArrayCollection();       
         $this->disponibilitaFigure = new ArrayCollection();                
-        $this->disponibilitaAree = new ArrayCollection();                
+        $this->darea = new ArrayCollection();                
         
     }
     
+
+ 
+    
+    public function __toString() 
+    {
+        return $this->denominazione;
+    }
+
 
     /**
      * Get id
@@ -348,6 +357,9 @@ class Azienda
      */
     public function addPersonale(\AppBundle\Entity\Personale $personale)
     {
+        
+        $personale->setAzienda($this);
+        
         $this->personale[] = $personale;
 
         return $this;
@@ -373,39 +385,7 @@ class Azienda
         return $this->personale;
     }
 
-    /**
-     * Add sedi
-     *
-     * @param \AppBundle\Entity\Sede $sedi
-     * @return Azienda
-     */
-    public function addSedi(\AppBundle\Entity\Sede $sedi)
-    {
-        $this->sedi[] = $sedi;
-
-        return $this;
-    }
-
-    /**
-     * Remove sedi
-     *
-     * @param \AppBundle\Entity\Sede $sedi
-     */
-    public function removeSedi(\AppBundle\Entity\Sede $sedi)
-    {
-        $this->sedi->removeElement($sedi);
-    }
-
-    /**
-     * Get sedi
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getSedi()
-    {
-        return $this->sedi;
-    }
-
+    
     /**
      * Add questionari
      *
@@ -472,36 +452,44 @@ class Azienda
         return $this->disponibilitaFigure;
     }
 
+   
+
     /**
-     * Add disponibilitaAree
+     * Add sede
      *
-     * @param \AppBundle\Entity\DisponibilitaAree $disponibilitaAree
+     * @param \AppBundle\Entity\Sede $sede
      * @return Azienda
      */
-    public function addDisponibilitaAree(\AppBundle\Entity\DisponibilitaAree $disponibilitaAree)
+    public function addSede(\AppBundle\Entity\Sede $sede)
     {
-        $this->disponibilitaAree[] = $disponibilitaAree;
+        $sede->setAzienda($this);
+
+        $this->sede[] = $sede;
 
         return $this;
     }
 
     /**
-     * Remove disponibilitaAree
+     * Remove sede
      *
-     * @param \AppBundle\Entity\DisponibilitaAree $disponibilitaAree
+     * @param \AppBundle\Entity\Sede $sede
      */
-    public function removeDisponibilitaAree(\AppBundle\Entity\DisponibilitaAree $disponibilitaAree)
+    public function removeSede(\AppBundle\Entity\Sede $sede)
     {
-        $this->disponibilitaAree->removeElement($disponibilitaAree);
+        $this->sede->removeElement($sede);
     }
 
     /**
-     * Get disponibilitaAree
+     * Get sede
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getDisponibilitaAree()
+    public function getSede()
     {
-        return $this->disponibilitaAree;
+        return $this->sede;
     }
+
+   
+
+ 
 }

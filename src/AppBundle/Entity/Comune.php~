@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Comune
@@ -133,5 +134,10 @@ class Comune
     public function getSedi()
     {
         return $this->sedi;
+    }
+    
+    public function __toString() 
+    {
+        return $this->nome;
     }
 }

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Scuola
@@ -28,6 +29,36 @@ class Scuola
      */
     private $denominazione;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="indirizzo", type="string", length=128, nullable=true)
+     */
+    private $indirizzo;    
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=32, nullable=true)
+     */
+    private $telefono;   
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fax", type="string", length=32, nullable=true)
+     */
+    private $fax;       
+    
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=64, nullable=true)
+     */
+    private $email;       
+
+    
+    
     
     /**
      * @ORM\OneToMany(targetEntity="Indirizzo", mappedBy="scuola")
@@ -41,6 +72,8 @@ class Scuola
         $this->indirizzi = new ArrayCollection();
       
     }    
+
+  
 
     /**
      * Get id
@@ -73,6 +106,98 @@ class Scuola
     public function getDenominazione()
     {
         return $this->denominazione;
+    }
+
+    /**
+     * Set indirizzo
+     *
+     * @param string $indirizzo
+     * @return Scuola
+     */
+    public function setIndirizzo($indirizzo)
+    {
+        $this->indirizzo = $indirizzo;
+
+        return $this;
+    }
+
+    /**
+     * Get indirizzo
+     *
+     * @return string 
+     */
+    public function getIndirizzo()
+    {
+        return $this->indirizzo;
+    }
+
+    /**
+     * Set telefono
+     *
+     * @param string $telefono
+     * @return Scuola
+     */
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get telefono
+     *
+     * @return string 
+     */
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
+     * Set fax
+     *
+     * @param string $fax
+     * @return Scuola
+     */
+    public function setFax($fax)
+    {
+        $this->fax = $fax;
+
+        return $this;
+    }
+
+    /**
+     * Get fax
+     *
+     * @return string 
+     */
+    public function getFax()
+    {
+        return $this->fax;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Scuola
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**

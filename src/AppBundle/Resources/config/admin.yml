@@ -36,7 +36,7 @@ services:
     sonata.admin.sede:
         class: AppBundle\Admin\SedeAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Sedi" }
+            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Sedi aziende" }
         arguments:
             - ~
             - AppBundle\Entity\Sede
@@ -67,14 +67,84 @@ services:
         calls:
             - [ setTranslationDomain, [AppBundle]]
      
+   
+
+    sonata.admin.areaprofessionale:
+        class: AppBundle\Admin\AreaProfessionaleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Aree professionali" }
+        arguments:
+            - ~
+            - AppBundle\Entity\AreaProfessionale
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    sonata.admin.disponibilitaaree:
+        class: AppBundle\Admin\DisponibilitaAreeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Disponibilita per aree professionali " }
+        arguments:
+            - ~
+            - AppBundle\Entity\Darea
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+
+
+
+    sonata.admin.scuola:
+        class: AppBundle\Admin\ScuolaAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Contenuti", label: "Scuole" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Scuola
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+
+
+   
+   
+            
+    # GRID INTERNE (ACCESSO INDIRETTO COME SUB-FORM
+
     sonata.admin.personalegrid:
         class: AppBundle\Admin\PersonaleGridAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: null, label: "Personale aziende - Internal" }
+            - { name: sonata.admin, manager_type: orm, group: "Internal", label: "Personale aziende - Internal" }
         arguments:
             - ~
             - AppBundle\Entity\Personale
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle]]
-    
+
+
+    sonata.admin.sedegrid:
+        class: AppBundle\Admin\SedeGridAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Internal", label: "Sedi aziende - Internal" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Sede
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+
+    sonata.admin.disponibilitaareegrid:
+        class: AppBundle\Admin\DisponibilitaAreeGridAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Internal", label: "Disponibilita aree - Internal" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Darea
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+  

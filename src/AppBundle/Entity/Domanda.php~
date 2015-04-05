@@ -102,4 +102,37 @@ class Domanda
     {
         return $this->posizione;
     }
+
+    /**
+     * Add risposte
+     *
+     * @param \AppBundle\Entity\Risposta $risposte
+     * @return Domanda
+     */
+    public function addRisposte(\AppBundle\Entity\Risposta $risposte)
+    {
+        $this->risposte[] = $risposte;
+
+        return $this;
+    }
+
+    /**
+     * Remove risposte
+     *
+     * @param \AppBundle\Entity\Risposta $risposte
+     */
+    public function removeRisposte(\AppBundle\Entity\Risposta $risposte)
+    {
+        $this->risposte->removeElement($risposte);
+    }
+
+    /**
+     * Get risposte
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRisposte()
+    {
+        return $this->risposte;
+    }
 }

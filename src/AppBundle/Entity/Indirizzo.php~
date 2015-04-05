@@ -133,4 +133,37 @@ class Indirizzo
     {
         return $this->scuola;
     }
+
+    /**
+     * Add disponibilitaFigure
+     *
+     * @param \AppBundle\Entity\DisponibilitaFigure $disponibilitaFigure
+     * @return Indirizzo
+     */
+    public function addDisponibilitaFigure(\AppBundle\Entity\DisponibilitaFigure $disponibilitaFigure)
+    {
+        $this->disponibilitaFigure[] = $disponibilitaFigure;
+
+        return $this;
+    }
+
+    /**
+     * Remove disponibilitaFigure
+     *
+     * @param \AppBundle\Entity\DisponibilitaFigure $disponibilitaFigure
+     */
+    public function removeDisponibilitaFigure(\AppBundle\Entity\DisponibilitaFigure $disponibilitaFigure)
+    {
+        $this->disponibilitaFigure->removeElement($disponibilitaFigure);
+    }
+
+    /**
+     * Get disponibilitaFigure
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getDisponibilitaFigure()
+    {
+        return $this->disponibilitaFigure;
+    }
 }
