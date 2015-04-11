@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * AreaProfessionale
+ * TempoPermanenza
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class AreaProfessionale
+class TempoPermanenza
 {
     /**
      * @var integer
@@ -25,21 +25,26 @@ class AreaProfessionale
     /**
      * @var string
      *
-     * @ORM\Column(name="descrizione", type="string", length=128)
+     * @ORM\Column(name="descrizione", type="string", length=32)
      */
     private $descrizione;
 
     /**
-     * @ORM\OneToMany(targetEntity="DisponibilitaArea", mappedBy="area")
+     * @ORM\OneToMany(targetEntity="DisponibilitaFigure", mappedBy="tempopermanenza")
      */
-    protected $disponibilitaarea;
+    protected $disponibilitafigure;
     
     public function __construct()
     {
-        $this->disponibilitaarea = new ArrayCollection();
-    }    
+        $this->disponibilitafigure = new ArrayCollection();
+    }
     
-    
+    public function __toString() 
+    {
+        return $this->descrizione;
+    }
+
+
     /**
      * Get id
      *
@@ -54,7 +59,7 @@ class AreaProfessionale
      * Set descrizione
      *
      * @param string $descrizione
-     * @return AreeProfessionali
+     * @return TempoPermanenza
      */
     public function setDescrizione($descrizione)
     {
@@ -73,45 +78,36 @@ class AreaProfessionale
         return $this->descrizione;
     }
 
-    
-    
-    public function __toString() 
-    {
-        return $this->descrizione;
-    }
-
-   
-
     /**
-     * Add disponibilitaarea
+     * Add disponibilitafigure
      *
-     * @param \AppBundle\Entity\DisponibilitaArea $disponibilitaarea
-     * @return AreaProfessionale
+     * @param \AppBundle\Entity\DisponibilitaFigure $disponibilitafigure
+     * @return TempoPermanenza
      */
-    public function addDisponibilitaarea(\AppBundle\Entity\DisponibilitaArea $disponibilitaarea)
+    public function addDisponibilitafigure(\AppBundle\Entity\DisponibilitaFigure $disponibilitafigure)
     {
-        $this->disponibilitaarea[] = $disponibilitaarea;
+        $this->disponibilitafigure[] = $disponibilitafigure;
 
         return $this;
     }
 
     /**
-     * Remove disponibilitaarea
+     * Remove disponibilitafigure
      *
-     * @param \AppBundle\Entity\DisponibilitaArea $disponibilitaarea
+     * @param \AppBundle\Entity\DisponibilitaFigure $disponibilitafigure
      */
-    public function removeDisponibilitaarea(\AppBundle\Entity\DisponibilitaArea $disponibilitaarea)
+    public function removeDisponibilitafigure(\AppBundle\Entity\DisponibilitaFigure $disponibilitafigure)
     {
-        $this->disponibilitaarea->removeElement($disponibilitaarea);
+        $this->disponibilitafigure->removeElement($disponibilitafigure);
     }
 
     /**
-     * Get disponibilitaarea
+     * Get disponibilitafigure
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getDisponibilitaarea()
+    public function getDisponibilitafigure()
     {
-        return $this->disponibilitaarea;
+        return $this->disponibilitafigure;
     }
 }

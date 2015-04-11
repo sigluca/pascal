@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Indirizzo
@@ -36,7 +37,7 @@ class Indirizzo
     private $durata;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Scuola", inversedBy="indirizzi")
+     * @ORM\ManyToOne(targetEntity="Scuola", inversedBy="indirizzo", cascade={"persist"})
      * @ORM\JoinColumn(name="scuola", referencedColumnName="id")
      */
     private $scuola;
@@ -47,6 +48,11 @@ class Indirizzo
      * @ORM\OneToMany(targetEntity="DisponibilitaFigure", mappedBy="disponibilitaFigure")
      */
     protected $disponibilitaFigure;
+    
+    
+    
+    
+    private $labelcomposta;
 
     
     
@@ -166,4 +172,19 @@ class Indirizzo
     {
         return $this->disponibilitaFigure;
     }
+    
+    
+    public function __toString() 
+    {
+        return $this->denominazione;
+        
+    }
+    
+
+    public function getLabelcomposta()
+    {
+        return $this->denominazione." - ".$this->scuola;
+    }
+
+
 }

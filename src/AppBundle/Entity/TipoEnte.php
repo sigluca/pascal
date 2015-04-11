@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * AreaProfessionale
+ * TipoEnte
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class AreaProfessionale
+class TipoEnte
 {
     /**
      * @var integer
@@ -30,16 +30,27 @@ class AreaProfessionale
     private $descrizione;
 
     /**
-     * @ORM\OneToMany(targetEntity="DisponibilitaArea", mappedBy="area")
+     * @ORM\OneToMany(targetEntity="EnteSomministratore", mappedBy="tipo")
      */
-    protected $disponibilitaarea;
+    protected $entesomministratore;
     
     public function __construct()
     {
-        $this->disponibilitaarea = new ArrayCollection();
-    }    
+        $this->entesomministratore = new ArrayCollection();
+    }
+    
+    public function __toString() 
+    {
+        return $this->descrizione;
+        
+    }
+
     
     
+   
+
+   
+
     /**
      * Get id
      *
@@ -54,7 +65,7 @@ class AreaProfessionale
      * Set descrizione
      *
      * @param string $descrizione
-     * @return AreeProfessionali
+     * @return TipoEnte
      */
     public function setDescrizione($descrizione)
     {
@@ -73,45 +84,36 @@ class AreaProfessionale
         return $this->descrizione;
     }
 
-    
-    
-    public function __toString() 
-    {
-        return $this->descrizione;
-    }
-
-   
-
     /**
-     * Add disponibilitaarea
+     * Add entesomministratore
      *
-     * @param \AppBundle\Entity\DisponibilitaArea $disponibilitaarea
-     * @return AreaProfessionale
+     * @param \AppBundle\Entity\EnteSomministratore $entesomministratore
+     * @return TipoEnte
      */
-    public function addDisponibilitaarea(\AppBundle\Entity\DisponibilitaArea $disponibilitaarea)
+    public function addEntesomministratore(\AppBundle\Entity\EnteSomministratore $entesomministratore)
     {
-        $this->disponibilitaarea[] = $disponibilitaarea;
+        $this->entesomministratore[] = $entesomministratore;
 
         return $this;
     }
 
     /**
-     * Remove disponibilitaarea
+     * Remove entesomministratore
      *
-     * @param \AppBundle\Entity\DisponibilitaArea $disponibilitaarea
+     * @param \AppBundle\Entity\EnteSomministratore $entesomministratore
      */
-    public function removeDisponibilitaarea(\AppBundle\Entity\DisponibilitaArea $disponibilitaarea)
+    public function removeEntesomministratore(\AppBundle\Entity\EnteSomministratore $entesomministratore)
     {
-        $this->disponibilitaarea->removeElement($disponibilitaarea);
+        $this->entesomministratore->removeElement($entesomministratore);
     }
 
     /**
-     * Get disponibilitaarea
+     * Get entesomministratore
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getDisponibilitaarea()
+    public function getEntesomministratore()
     {
-        return $this->disponibilitaarea;
+        return $this->entesomministratore;
     }
 }

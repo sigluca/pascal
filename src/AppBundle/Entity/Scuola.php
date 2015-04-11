@@ -32,9 +32,9 @@ class Scuola
     /**
      * @var string
      *
-     * @ORM\Column(name="indirizzo", type="string", length=128, nullable=true)
+     * @ORM\Column(name="indirizzostradale", type="string", length=128, nullable=true)
      */
-    private $indirizzo;    
+    private $indirizzostradale;    
     
     /**
      * @var string
@@ -61,17 +61,26 @@ class Scuola
     
     
     /**
-     * @ORM\OneToMany(targetEntity="Indirizzo", mappedBy="scuola")
+     * @ORM\OneToMany(targetEntity="Indirizzo", mappedBy="scuola", cascade={"persist"})
      */
-    protected $indirizzi;
+    protected $indirizzo;
 
     
     
     public function __construct()
     {
-        $this->indirizzi = new ArrayCollection();
+        $this->indirizzo = new ArrayCollection();
       
-    }    
+    } 
+    
+    public function __toString() 
+    {
+    
+        return $this->denominazione;
+    }
+
+
+      
 
   
 
@@ -109,26 +118,26 @@ class Scuola
     }
 
     /**
-     * Set indirizzo
+     * Set indirizzostradale
      *
-     * @param string $indirizzo
+     * @param string $indirizzostradale
      * @return Scuola
      */
-    public function setIndirizzo($indirizzo)
+    public function setIndirizzostradale($indirizzostradale)
     {
-        $this->indirizzo = $indirizzo;
+        $this->indirizzostradale = $indirizzostradale;
 
         return $this;
     }
 
     /**
-     * Get indirizzo
+     * Get indirizzostradale
      *
      * @return string 
      */
-    public function getIndirizzo()
+    public function getIndirizzostradale()
     {
-        return $this->indirizzo;
+        return $this->indirizzostradale;
     }
 
     /**
@@ -201,35 +210,36 @@ class Scuola
     }
 
     /**
-     * Add indirizzi
+     * Add indirizzo
      *
-     * @param \AppBundle\Entity\Indirizzo $indirizzi
+     * @param \AppBundle\Entity\Indirizzo $indirizzo
      * @return Scuola
      */
-    public function addIndirizzi(\AppBundle\Entity\Indirizzo $indirizzi)
+    public function addIndirizzo(\AppBundle\Entity\Indirizzo $indirizzo)
     {
-        $this->indirizzi[] = $indirizzi;
+        $indirizzo->setScuola($this);
+        $this->indirizzo[] = $indirizzo;
 
         return $this;
     }
 
     /**
-     * Remove indirizzi
+     * Remove indirizzo
      *
-     * @param \AppBundle\Entity\Indirizzo $indirizzi
+     * @param \AppBundle\Entity\Indirizzo $indirizzo
      */
-    public function removeIndirizzi(\AppBundle\Entity\Indirizzo $indirizzi)
+    public function removeIndirizzo(\AppBundle\Entity\Indirizzo $indirizzo)
     {
-        $this->indirizzi->removeElement($indirizzi);
+        $this->indirizzo->removeElement($indirizzo);
     }
 
     /**
-     * Get indirizzi
+     * Get indirizzo
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getIndirizzi()
+    public function getIndirizzo()
     {
-        return $this->indirizzi;
+        return $this->indirizzo;
     }
 }

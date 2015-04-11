@@ -33,6 +33,13 @@ class Questionario
      * @ORM\JoinColumn(name="azienda", referencedColumnName="id")
      */
     private $azienda;
+    
+    
+   /**
+     * @ORM\ManyToOne(targetEntity="Somministratore", inversedBy="questionario")
+     * @ORM\JoinColumn(name="somministratore", referencedColumnName="id")
+     */
+    private $somministratore;    
 
     /**
      * @ORM\OneToMany(targetEntity="RispostaData", mappedBy="questionario")

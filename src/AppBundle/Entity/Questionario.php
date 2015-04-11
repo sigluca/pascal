@@ -33,6 +33,13 @@ class Questionario
      * @ORM\JoinColumn(name="azienda", referencedColumnName="id")
      */
     private $azienda;
+    
+    
+   /**
+     * @ORM\ManyToOne(targetEntity="Somministratore", inversedBy="questionario")
+     * @ORM\JoinColumn(name="somministratore", referencedColumnName="id")
+     */
+    private $somministratore;    
 
     /**
      * @ORM\OneToMany(targetEntity="RispostaData", mappedBy="questionario")
@@ -131,5 +138,28 @@ class Questionario
     public function getRisposteDate()
     {
         return $this->risposteDate;
+    }
+
+    /**
+     * Set somministratore
+     *
+     * @param \AppBundle\Entity\Somministratore $somministratore
+     * @return Questionario
+     */
+    public function setSomministratore(\AppBundle\Entity\Somministratore $somministratore = null)
+    {
+        $this->somministratore = $somministratore;
+
+        return $this;
+    }
+
+    /**
+     * Get somministratore
+     *
+     * @return \AppBundle\Entity\Somministratore 
+     */
+    public function getSomministratore()
+    {
+        return $this->somministratore;
     }
 }

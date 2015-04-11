@@ -32,9 +32,9 @@ class Scuola
     /**
      * @var string
      *
-     * @ORM\Column(name="indirizzo", type="string", length=128, nullable=true)
+     * @ORM\Column(name="indirizzostradale", type="string", length=128, nullable=true)
      */
-    private $indirizzo;    
+    private $indirizzostradale;    
     
     /**
      * @var string
@@ -61,17 +61,19 @@ class Scuola
     
     
     /**
-     * @ORM\OneToMany(targetEntity="Indirizzo", mappedBy="scuola")
+     * @ORM\OneToMany(targetEntity="Indirizzo", mappedBy="scuola", cascade={"persist"})
      */
-    protected $indirizzi;
+    protected $indirizzo;
 
     
     
     public function __construct()
     {
-        $this->indirizzi = new ArrayCollection();
+        $this->indirizzo = new ArrayCollection();
       
     }    
+
+  
 
   
 }

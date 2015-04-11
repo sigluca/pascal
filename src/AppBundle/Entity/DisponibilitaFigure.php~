@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * DisponibilitaFigure
@@ -29,11 +30,10 @@ class DisponibilitaFigure
     private $mansioniallievo;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="tempopermanenza", type="integer")
+     * @ORM\ManyToOne(targetEntity="Tempopermanenza", inversedBy="disponibilitafigure")
+     * @ORM\JoinColumn(name="tempopermanenza", referencedColumnName="id")
      */
-    private $tempopermanenza;
+     private $tempopermanenza;
 
     /**
      * @ORM\ManyToOne(targetEntity="Azienda", inversedBy="disponibilitaFigure")
@@ -47,17 +47,94 @@ class DisponibilitaFigure
      */
     private $indirizzo;
 
+
+   /**
+     * @ORM\OneToMany(targetEntity="RichiestaConoscenza", mappedBy="disponibilitaFigure",cascade={"persist"} )
+     */
+    protected $richiestaconoscenza;
+    
     
     /**
-     * @ORM\OneToMany(targetEntity="DisponibilitaMese", mappedBy="disponibilita")
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibilegennaio", type="boolean")
      */
-    protected $mesi;
-
+    private $disponibilegennaio;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibilefebbraio", type="boolean")
+     */
+    private $disponibilefebbraio;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibilemarzo", type="boolean")
+     */
+    private $disponibilemarzo;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibileaprile", type="boolean")
+     */
+    private $disponibileaprile;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibilemaggio", type="boolean")
+     */
+    private $disponibilemaggio;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibilegiugno", type="boolean")
+     */
+    private $disponibilegiugno;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibileluglio", type="boolean")
+     */
+    private $disponibileluglio;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibileagosto", type="boolean")
+     */
+    private $disponibileagosto;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibilesettembre", type="boolean")
+     */
+    private $disponibilesettembre;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibileottobre", type="boolean")
+     */
+    private $disponibileottobre;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibilenovembre", type="boolean")
+     */
+    private $disponibilenovembre;    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="disponibiledicembre", type="boolean")
+     */
+    private $disponibiledicembre;    
+ 
+    
+    
     
     
     public function __construct()
     {
-        $this->mesi = new ArrayCollection();                
+        $this->mesi = new ArrayCollection();
+        $this->richiestaconoscenza = new ArrayCollection(); 
     }
     
     
@@ -93,29 +170,6 @@ class DisponibilitaFigure
     public function getMansioniallievo()
     {
         return $this->mansioniallievo;
-    }
-
-    /**
-     * Set tempopermanenza
-     *
-     * @param integer $tempopermanenza
-     * @return DisponibilitaFigure
-     */
-    public function setTempopermanenza($tempopermanenza)
-    {
-        $this->tempopermanenza = $tempopermanenza;
-
-        return $this;
-    }
-
-    /**
-     * Get tempopermanenza
-     *
-     * @return integer 
-     */
-    public function getTempopermanenza()
-    {
-        return $this->tempopermanenza;
     }
 
     /**
@@ -164,36 +218,341 @@ class DisponibilitaFigure
         return $this->indirizzo;
     }
 
+
     /**
-     * Add mesi
+     * Add richiestaconoscenza
      *
-     * @param \AppBundle\Entity\DisponibilitaMese $mesi
+     * @param \AppBundle\Entity\RichiestaConoscenza $richiestaconoscenza
      * @return DisponibilitaFigure
      */
-    public function addMesi(\AppBundle\Entity\DisponibilitaMese $mesi)
+    public function addRichiestaconoscenza(\AppBundle\Entity\RichiestaConoscenza $richiestaconoscenza)
     {
-        $this->mesi[] = $mesi;
+        $richiestaconoscenza->setDisponibilitaFigure($this);
+        $this->richiestaconoscenza[] = $richiestaconoscenza;
 
         return $this;
     }
 
     /**
-     * Remove mesi
+     * Add richiestaconoscenzon
      *
-     * @param \AppBundle\Entity\DisponibilitaMese $mesi
+     * @param \AppBundle\Entity\RichiestaConoscenza $richiestaconoscenza
+     * @return DisponibilitaFigure
      */
-    public function removeMesi(\AppBundle\Entity\DisponibilitaMese $mesi)
+    public function addRichiestaconoscenzon(\AppBundle\Entity\RichiestaConoscenza $richiestaconoscenza)
     {
-        $this->mesi->removeElement($mesi);
+        $richiestaconoscenza->setDisponibilitaFigure($this);        
+        $this->richiestaconoscenza[] = $richiestaconoscenza;
+
+        return $this;
+    }
+    
+    
+    
+    /**
+     * Remove richiestaconoscenza
+     *
+     * @param \AppBundle\Entity\RichiestaConoscenza $richiestaconoscenza
+     */
+    public function removeRichiestaconoscenza(\AppBundle\Entity\RichiestaConoscenza $richiestaconoscenza)
+    {
+        $this->richiestaconoscenza->removeElement($richiestaconoscenza);
     }
 
     /**
-     * Get mesi
+     * Remove richiestaconoscenzon
+     *
+     * @param \AppBundle\Entity\RichiestaConoscenza $richiestaconoscenza
+     */
+    public function removeRichiestaconoscenzon(\AppBundle\Entity\RichiestaConoscenza $richiestaconoscenza)
+    {
+        $this->richiestaconoscenza->removeElement($richiestaconoscenza);
+    }    
+    
+    
+    /**
+     * Get richiestaconoscenza
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getMesi()
+    public function getRichiestaconoscenza()
     {
-        return $this->mesi;
+        return $this->richiestaconoscenza;
+    }
+
+    /**
+     * Set disponibilegennaio
+     *
+     * @param boolean $disponibilegennaio
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibilegennaio($disponibilegennaio)
+    {
+        $this->disponibilegennaio = $disponibilegennaio;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilegennaio
+     *
+     * @return boolean 
+     */
+    public function getDisponibilegennaio()
+    {
+        return $this->disponibilegennaio;
+    }
+
+    /**
+     * Set disponibilefebbraio
+     *
+     * @param boolean $disponibilefebbraio
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibilefebbraio($disponibilefebbraio)
+    {
+        $this->disponibilefebbraio = $disponibilefebbraio;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilefebbraio
+     *
+     * @return boolean 
+     */
+    public function getDisponibilefebbraio()
+    {
+        return $this->disponibilefebbraio;
+    }
+
+    /**
+     * Set disponibilemarzo
+     *
+     * @param boolean $disponibilemarzo
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibilemarzo($disponibilemarzo)
+    {
+        $this->disponibilemarzo = $disponibilemarzo;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilemarzo
+     *
+     * @return boolean 
+     */
+    public function getDisponibilemarzo()
+    {
+        return $this->disponibilemarzo;
+    }
+
+    /**
+     * Set disponibileaprile
+     *
+     * @param boolean $disponibileaprile
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibileaprile($disponibileaprile)
+    {
+        $this->disponibileaprile = $disponibileaprile;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibileaprile
+     *
+     * @return boolean 
+     */
+    public function getDisponibileaprile()
+    {
+        return $this->disponibileaprile;
+    }
+
+    /**
+     * Set disponibilemaggio
+     *
+     * @param boolean $disponibilemaggio
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibilemaggio($disponibilemaggio)
+    {
+        $this->disponibilemaggio = $disponibilemaggio;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilemaggio
+     *
+     * @return boolean 
+     */
+    public function getDisponibilemaggio()
+    {
+        return $this->disponibilemaggio;
+    }
+
+    /**
+     * Set disponibilegiugno
+     *
+     * @param boolean $disponibilegiugno
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibilegiugno($disponibilegiugno)
+    {
+        $this->disponibilegiugno = $disponibilegiugno;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilegiugno
+     *
+     * @return boolean 
+     */
+    public function getDisponibilegiugno()
+    {
+        return $this->disponibilegiugno;
+    }
+
+    /**
+     * Set disponibileluglio
+     *
+     * @param boolean $disponibileluglio
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibileluglio($disponibileluglio)
+    {
+        $this->disponibileluglio = $disponibileluglio;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibileluglio
+     *
+     * @return boolean 
+     */
+    public function getDisponibileluglio()
+    {
+        return $this->disponibileluglio;
+    }
+
+    /**
+     * Set disponibileagosto
+     *
+     * @param boolean $disponibileagosto
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibileagosto($disponibileagosto)
+    {
+        $this->disponibileagosto = $disponibileagosto;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibileagosto
+     *
+     * @return boolean 
+     */
+    public function getDisponibileagosto()
+    {
+        return $this->disponibileagosto;
+    }
+
+    /**
+     * Set disponibilesettembre
+     *
+     * @param boolean $disponibilesettembre
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibilesettembre($disponibilesettembre)
+    {
+        $this->disponibilesettembre = $disponibilesettembre;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilesettembre
+     *
+     * @return boolean 
+     */
+    public function getDisponibilesettembre()
+    {
+        return $this->disponibilesettembre;
+    }
+
+    /**
+     * Set disponibileottobre
+     *
+     * @param boolean $disponibileottobre
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibileottobre($disponibileottobre)
+    {
+        $this->disponibileottobre = $disponibileottobre;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibileottobre
+     *
+     * @return boolean 
+     */
+    public function getDisponibileottobre()
+    {
+        return $this->disponibileottobre;
+    }
+
+    /**
+     * Set disponibilenovembre
+     *
+     * @param boolean $disponibilenovembre
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibilenovembre($disponibilenovembre)
+    {
+        $this->disponibilenovembre = $disponibilenovembre;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilenovembre
+     *
+     * @return boolean 
+     */
+    public function getDisponibilenovembre()
+    {
+        return $this->disponibilenovembre;
+    }
+
+    /**
+     * Set disponibiledicembre
+     *
+     * @param boolean $disponibiledicembre
+     * @return DisponibilitaFigure
+     */
+    public function setDisponibiledicembre($disponibiledicembre)
+    {
+        $this->disponibiledicembre = $disponibiledicembre;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibiledicembre
+     *
+     * @return boolean 
+     */
+    public function getDisponibiledicembre()
+    {
+        return $this->disponibiledicembre;
     }
 }

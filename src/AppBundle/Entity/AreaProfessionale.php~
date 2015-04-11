@@ -30,13 +30,13 @@ class AreaProfessionale
     private $descrizione;
 
     /**
-     * @ORM\OneToMany(targetEntity="Darea", mappedBy="area")
+     * @ORM\OneToMany(targetEntity="DisponibilitaArea", mappedBy="area")
      */
-    protected $darea;
+    protected $disponibilitaarea;
     
     public function __construct()
     {
-        $this->darea = new ArrayCollection();
+        $this->disponibilitaarea = new ArrayCollection();
     }    
     
     
@@ -80,4 +80,5 @@ class AreaProfessionale
         return $this->descrizione;
     }
 
+   
 }

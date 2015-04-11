@@ -1,0 +1,136 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * RichiestaConoscenza
+ *
+ * @ORM\Table()
+ * @ORM\Entity
+ */
+class RichiestaConoscenza
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dettagli", type="string", length=64, nullable=true)
+     */
+    private $dettagli;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Conoscenza", inversedBy="richiestaconoscenza")
+     * @ORM\JoinColumn(name="conoscenza", referencedColumnName="id")
+     */
+    private $conoscenza;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="DisponibilitaFigure", inversedBy="richiestaconoscenza")
+     * @ORM\JoinColumn(name="disponibilitaFigure", referencedColumnName="id")
+     */
+    private $disponibilitaFigure;
+ 
+    
+    public function __toString() 
+    {
+        if($this->dettagli!=NULL)
+        return $this->conoscenza->getLabelcomposta()." - ".$this->dettagli;
+        else return $this->conoscenza->getLabelcomposta();
+        
+    }
+
+   
+
+    
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set dettagli
+     *
+     * @param string $dettagli
+     * @return RichiestaConoscenza
+     */
+    public function setDettagli($dettagli)
+    {
+        $this->dettagli = $dettagli;
+
+        return $this;
+    }
+
+    /**
+     * Get dettagli
+     *
+     * @return string 
+     */
+    public function getDettagli()
+    {
+        return $this->dettagli;
+    }
+
+    /**
+     * Set conoscenza
+     *
+     * @param \AppBundle\Entity\Conoscenza $conoscenza
+     * @return RichiestaConoscenza
+     */
+    public function setConoscenza(\AppBundle\Entity\Conoscenza $conoscenza = null)
+    {
+        $this->conoscenza = $conoscenza;
+
+        return $this;
+    }
+
+    /**
+     * Get conoscenza
+     *
+     * @return \AppBundle\Entity\Conoscenza 
+     */
+    public function getConoscenza()
+    {
+        return $this->conoscenza;
+    }
+
+    /**
+     * Set disponibilitaFigure
+     *
+     * @param \AppBundle\Entity\DisponibilitaFigure $disponibilitaFigure
+     * @return RichiestaConoscenza
+     */
+    public function setDisponibilitaFigure(\AppBundle\Entity\DisponibilitaFigure $disponibilitaFigure = null)
+    {
+        $this->disponibilitaFigure = $disponibilitaFigure;
+
+        return $this;
+    }
+
+    /**
+     * Get disponibilitaFigure
+     *
+     * @return \AppBundle\Entity\DisponibilitaFigure 
+     */
+    public function getDisponibilitaFigure()
+    {
+        return $this->disponibilitaFigure;
+    }
+}

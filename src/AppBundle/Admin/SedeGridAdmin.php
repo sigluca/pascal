@@ -7,12 +7,27 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
   
 class SedeGridAdmin extends Admin
 {
     protected $baseRouteName = 'sedegridadmin';
 
-    protected $baseRoutePattern = 'Sede-Grid-Admin';        
+    protected $baseRoutePattern = 'Sede-Grid-Admin'; 
+    
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
+        
+        
+             $showMapper
+            ->add('denominazione',null,array('label' => 'Nome sede'))
+            ->add('indirizzo',null,array('label' => 'Indirizzo'))
+            ->add('telefono',null,array('label' => 'Telefono'))
+            ->add('fax',null,array('label' => 'Fax'))
+        ;
+
+    }
     
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)

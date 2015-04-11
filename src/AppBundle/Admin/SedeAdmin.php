@@ -7,12 +7,30 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
   
 class SedeAdmin extends Admin
 {
     protected $baseRouteName = 'sedeadmin';
 
-    protected $baseRoutePattern = 'Sede-Admin';        
+    protected $baseRoutePattern = 'Sede-Admin';   
+    
+    
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
+        
+        
+             $showMapper
+            ->add('azienda')
+            ->add('denominazione',null,array('label' => 'Nome sede'))
+            ->add('indirizzo',null,array('label' => 'Indirizzo'))
+            ->add('telefono',null,array('label' => 'Telefono'))
+            ->add('fax',null,array('label' => 'Fax'))
+        ;
+
+    }
+    
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -58,12 +76,17 @@ class SedeAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     { 
         $listMapper
-            ->addIdentifier('denominazione',null,array('label' => 'Nome sede'))
+            ->add('denominazione',null,array('label' => 'Nome sede'))
             ->add('indirizzo',null,array('label' => 'Indirizzo'))
             ->add('telefono',null,array('label' => 'Telefono'))
             ->add('fax',null,array('label' => 'Fax'))
             ->add('comune.nome',null,array('label' => 'Comune'))
             ->add('azienda.denominazione',null,array('label' => 'Azienda'))
+            ->add('_action', 'actions', array(
+            'actions' => array(
+                'show' => array(),
+                'edit' => array(),
+                'delete' => array())))
         ;
     }
 }

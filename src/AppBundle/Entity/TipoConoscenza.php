@@ -6,12 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * AreaProfessionale
+ * TipoConoscenza
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class AreaProfessionale
+class TipoConoscenza
 {
     /**
      * @var integer
@@ -30,16 +30,25 @@ class AreaProfessionale
     private $descrizione;
 
     /**
-     * @ORM\OneToMany(targetEntity="DisponibilitaArea", mappedBy="area")
+     * @ORM\OneToMany(targetEntity="Conoscenza", mappedBy="tipo")
      */
-    protected $disponibilitaarea;
+    protected $conoscenza;
     
     public function __construct()
     {
-        $this->disponibilitaarea = new ArrayCollection();
-    }    
+        $this->conoscenza = new ArrayCollection();
+    }
+    
+    public function __toString() 
+    {
+        return $this->descrizione;
+        
+    }
+
     
     
+   
+
     /**
      * Get id
      *
@@ -54,7 +63,7 @@ class AreaProfessionale
      * Set descrizione
      *
      * @param string $descrizione
-     * @return AreeProfessionali
+     * @return TipoConoscenza
      */
     public function setDescrizione($descrizione)
     {
@@ -73,45 +82,36 @@ class AreaProfessionale
         return $this->descrizione;
     }
 
-    
-    
-    public function __toString() 
-    {
-        return $this->descrizione;
-    }
-
-   
-
     /**
-     * Add disponibilitaarea
+     * Add conoscenza
      *
-     * @param \AppBundle\Entity\DisponibilitaArea $disponibilitaarea
-     * @return AreaProfessionale
+     * @param \AppBundle\Entity\Conoscenza $conoscenza
+     * @return TipoConoscenza
      */
-    public function addDisponibilitaarea(\AppBundle\Entity\DisponibilitaArea $disponibilitaarea)
+    public function addConoscenza(\AppBundle\Entity\Conoscenza $conoscenza)
     {
-        $this->disponibilitaarea[] = $disponibilitaarea;
+        $this->conoscenza[] = $conoscenza;
 
         return $this;
     }
 
     /**
-     * Remove disponibilitaarea
+     * Remove conoscenza
      *
-     * @param \AppBundle\Entity\DisponibilitaArea $disponibilitaarea
+     * @param \AppBundle\Entity\Conoscenza $conoscenza
      */
-    public function removeDisponibilitaarea(\AppBundle\Entity\DisponibilitaArea $disponibilitaarea)
+    public function removeConoscenza(\AppBundle\Entity\Conoscenza $conoscenza)
     {
-        $this->disponibilitaarea->removeElement($disponibilitaarea);
+        $this->conoscenza->removeElement($conoscenza);
     }
 
     /**
-     * Get disponibilitaarea
+     * Get conoscenza
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getDisponibilitaarea()
+    public function getConoscenza()
     {
-        return $this->disponibilitaarea;
+        return $this->conoscenza;
     }
 }

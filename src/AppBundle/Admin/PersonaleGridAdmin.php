@@ -7,12 +7,39 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Show\ShowMapper;
 
 class PersonaleGridAdmin extends Admin
 {
     protected $baseRouteName = 'personalegridadmin';
 
     protected $baseRoutePattern = 'Personale-Grid-Admin';    
+    
+    
+    protected function configureShowFields(ShowMapper $showMapper)
+    {
+        // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
+        
+        
+             $showMapper
+            ->add('nome',null,array('label' => 'Nome'))
+            ->add('cognome',null,array('label' => 'Cognome'))
+            ->add('funzione',null,array('label' => 'Funzione'))
+            ->add('telefono',null,array('label' => 'Telefono'))
+            ->add('fax',null,array('label' => 'Fax'))
+            ->add('email',null,array('label' => 'E-mail'))
+           ->add('svoltocorso','checkbox',array('required'=>false, 'label' => 'Svolto corsi'))
+            ->add('disponibilecorso','checkbox',array('required'=>false, 'label' => 'Disponibile corsi'))
+              ->add('tipologia', 'sonata_type_model',array(
+            'property' => 'descrizione',
+            'label' => 'Tipologia',
+            'required' => true,
+            'multiple' => false,
+            'expanded' => false,
+            'btn_add' => false))
+        ;
+
+    }
     
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
@@ -60,8 +87,8 @@ class PersonaleGridAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     { 
         $listMapper
-           ->addIdentifier('nome',null,array('label' => 'Nome'))
-            ->addIdentifier('cognome',null,array('label' => 'Cognome'))
+           ->add('nome',null,array('label' => 'Nome'))
+            ->add('cognome',null,array('label' => 'Cognome'))
             ->add('funzione',null,array('label' => 'Funzione'))
             ->add('telefono',null,array('label' => 'Telefono'))
             ->add('fax',null,array('label' => 'Fax'))

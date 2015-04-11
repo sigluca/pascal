@@ -64,7 +64,7 @@ class Sede
     
     public function __toString() 
     {
-        return $this->denominazione;
+        return $this->denominazione." - ".$this->comune;
     }
 
 
