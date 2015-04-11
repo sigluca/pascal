@@ -113,6 +113,9 @@ sonata_admin:
     title_logo: bundles/app/img/logo_scuola.png     
     security:
         handler: sonata.admin.security.handler.role
+        
+    templates:
+        layout: AppBundle::my_layout.html.twig
 
 # SONATA USER-ADMIN
 sonata_user:
